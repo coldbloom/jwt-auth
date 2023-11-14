@@ -6,9 +6,15 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const router = require('./router/index')
+
 const PORT = process.env.PORT;
 const app = express();
-const corsOptions = {credentials: true, origin: process.env.URL || '*'};
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+app.use('/api', router);
 
 start = async () => {
     try {
