@@ -14,8 +14,11 @@ const Token = sequelize.define('token', {
 })
 
 // Добавление отношений между моделями (User и Token)
-User.hasMany(Token, { foreignKey: 'userId' });
-Token.belongsTo(User, { foreignKey: 'userId' });
+//User.hasOne(Token, { foreignKey: 'userId' });
+//Token.belongsTo(User, { foreignKey: 'userId' });
+
+User.hasOne(Token)
+Token.belongsTo(User)
 
 module.exports = { User, Token };
 
