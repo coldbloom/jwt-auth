@@ -12,10 +12,11 @@ class TokenService {
     }
 
     async saveToken(userId, refreshToken) {
-        const tokenData = await Token.findOne({user: userId})
+        const tokenData = await Token.findOne({where: {userId}})
         if (tokenData) { // перезаписываем токен
+            console.log('Зашли в условие Token.findOne({where: {userId}})')
             tokenData.refreshToken = refreshToken;
-            return tokenData.save();
+            return await tokenData.save();
         }
         const token = await Token.create({userId: userId, refreshToken})  // сценарий когда пользователь регистрируется первый раз, создаем модель Token
         return token;
